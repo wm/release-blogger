@@ -5,7 +5,7 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
-	"github.com/google/go-github/github"
+	"github.com/wm/release-blogger/Godeps/_workspace/src/github.com/google/go-github/github"
 	"io/ioutil"
 	"net/http"
 	"strconv"

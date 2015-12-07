@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/codegangsta/cli"
+	"github.com/wm/release-blogger/Godeps/_workspace/src/github.com/codegangsta/cli"
 	"github.com/wm/release-blogger/confluence"
 	"github.com/wm/release-blogger/server"
 	"log"

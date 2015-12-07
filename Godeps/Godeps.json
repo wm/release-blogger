@@ -1,0 +1,22 @@
+{
+	"ImportPath": "github.com/wm/release-blogger",
+	"GoVersion": "go1.5.2",
+	"Packages": [
+		"github.com/wm/release-blogger/release-blogger"
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-50-ga14c5b4",
+			"Rev": "a14c5b47c7efa4ff80cc42e1079a34b4756f2311"
+		},
+		{
+			"ImportPath": "github.com/google/go-github/github",
+			"Rev": "dcc1981fd936f5c4e35bea783d91aae3f2ca6e95"
+		},
+		{
+			"ImportPath": "github.com/google/go-querystring/query",
+			"Rev": "b61dfd1700df87f7d4f354561847b87e52335aa6"
+		}
+	]
+}

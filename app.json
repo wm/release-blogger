@@ -1,0 +1,14 @@
+{
+  "name": "release-blogger",
+  "description": "Publish Github releases to a Confluence Blog",
+  "keywords": [
+    "confluence",
+    "go",
+    "github",
+    "blog"
+  ],
+  "image": "heroku/go:1.5",
+  "mount_dir": "src/github.com/wm/release-blogger",
+  "website": "http://github.com/wm/release-blogger",
+  "repository": "http://github.com/wm/release-blogger"
+}
