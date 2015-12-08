@@ -30,12 +30,12 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:  "webserver, w",
-			Value: "https://iorahealth.atlassian.net",
+			Value: "https://mycompany.atlassian.net",
 			Usage: "Web server hosting your instance of Confluence",
 		},
 		cli.StringFlag{
 			Name:  "username, u",
-			Value: "wm",
+			Value: "jdoe",
 			Usage: "Your username",
 		},
 		cli.StringFlag{
