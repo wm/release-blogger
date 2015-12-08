@@ -1,21 +1,44 @@
 package main
 
 import (
+	"bytes"
 	"github.com/wm/release-blogger/Godeps/_workspace/src/github.com/codegangsta/cli"
 	"github.com/wm/release-blogger/confluence"
 	"github.com/wm/release-blogger/server"
+	"html/template"
 	"log"
 	"os"
 )
 
-func releaseToContent(c *cli.Context, event *server.ReleaseEvent, client *confluence.Client) (*confluence.Content, error) {
-	space := &confluence.Space{c.String("space")}
-	title := event.Release.Name
-	storage := &confluence.Storage{*event.Release.Body, "storage"}
-	body := &confluence.Body{*storage}
-	contentIn := &confluence.Content{"blogpost", *title, *space, *body}
+const blogPost = `
+	<h4>
+		<p>
+			<img alt="@{{.Sender.Login}}" class="avatar" height="20" src="{{.Sender.AvatarURL}}&amp;s=40" width="20"></img>
+			<a href="{{.Sender.URL}}">{{.Sender.Login}}</a> created release <a href="{{.Release.HTMLURL}}">{{.Release.TagName}}</a>
+			of <a href="{{.Repo.HTMLURL}}">{{.Repo.Name}}</a>.
+		</p>
+	</h4>
+	<p>{{.Release.Body}}</p>
+`
 
+func releaseToContent(c *cli.Context, event *server.ReleaseEvent, client *confluence.Client) (*confluence.Content, error) {
+	blogTitle := *event.Repo.Name + " "
+	blogTitle += *event.Release.TagName + " - " + *event.Release.Name
+
+	bodyBuff := bytes.NewBufferString("")
+	t, err := template.New("blogPost").Parse(blogPost)
+	err = t.Execute(bodyBuff, event)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	space := &confluence.Space{c.String("space")}
+	storage := &confluence.Storage{bodyBuff.String(), "storage"}
+	body := &confluence.Body{*storage}
+
+	contentIn := &confluence.Content{"blogpost", blogTitle, *space, *body}
 	contentOut, _, err := client.Content.Create(contentIn)
+
 	return contentOut, err
 }
 
