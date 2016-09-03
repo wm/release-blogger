@@ -43,7 +43,7 @@ type Content struct {
 
 // Creates a new piece of Content.
 func (s *ContentService) Create(content *Content) (*Content, *http.Response, error) {
-	req, err := s.client.NewRequest("POST", "wiki/rest/api/content/", content)
+	req, err := s.client.NewRequest("POST", "rest/api/content/", content)
 	if err != nil {
 		return nil, nil, err
 	}
